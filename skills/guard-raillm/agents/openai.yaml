@@ -1,0 +1,4 @@
+interface:
+  display_name: "guard-raiLLM"
+  short_description: "Evidence-based application security audits"
+  default_prompt: "Use $guard-raillm to audit this project's security and report evidence, fixes, and verification gaps."
