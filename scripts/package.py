@@ -2,6 +2,7 @@
 """Build a deterministic ZIP of the skill and its license, plus SHA-256."""
 import hashlib
 from pathlib import Path
+import re
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -11,7 +12,10 @@ def build():
     source = ROOT / "skills/guard-raillm"
     output = ROOT / "dist"
     output.mkdir(exist_ok=True)
-    archive = output / "guard-raillm-0.1.0.zip"
+    version = re.search(r'^  version: "([0-9]+\.[0-9]+\.[0-9]+)"$', (source / "SKILL.md").read_text(encoding="utf-8"), re.M)
+    if not version:
+        raise ValueError("Missing semantic version in skill metadata")
+    archive = output / f"guard-raillm-{version[1]}.zip"
     files = []
     for path in sorted(source.rglob("*")):
         if path.is_symlink() or getattr(path.lstat(), "st_file_attributes", 0) & 0x400:

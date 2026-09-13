@@ -55,6 +55,7 @@ Revise o diff da nova versão e guarde personalizações. O instalador não subs
 ## Exemplos
 
 ```text
+Use guard-raillm no meu endpoint https://meu-app.example/health; autorizo a auditoria básica dessa URL.
 Use guard-raillm em modo quick antes do deploy e destaque o que exige acesso ao ambiente.
 Use guard-raillm em modo diff entre a branch base e esta branch; verifique mudanças de autorização.
 Use guard-raillm em modo full no Supabase: confira RLS, RPCs e acesso entre dois tenants.
@@ -62,3 +63,5 @@ Use guard-raillm em modo verify para avaliar a correção de GR-001 com testes l
 ```
 
 Relatórios são potencialmente sensíveis. Use uma pasta privada ignorada pelo Git, confira seu conteúdo antes de compartilhar e não inclua credenciais reais nos prompts.
+
+Para auditorias sem código-fonte, veja [o modo endpoint](endpoint.md). A partir da v0.2.0, o pacote inclui o executor HTTP; instalações da v0.1.0 precisam ser atualizadas para usá-lo.

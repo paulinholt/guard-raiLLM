@@ -20,3 +20,11 @@ Registre host, versão, modelo, revisão da skill, permissões, prompt, artefato
 ## Registro inicial
 
 Validação desta release: metadados/links, testes de instalador, inventário e pacote ZIP. Os resultados do CI são a fonte para versões de Python/OS testadas. Execução ponta a ponta dos cenários nos três hosts permanece **não realizada**. Não publicar taxas de detecção sem um conjunto de casos e resultados auditáveis.
+
+## Executor de endpoint — v0.2.0
+
+Os testes em `tests/test_endpoint.py` executam um servidor local com respostas sintéticas e verificam requisições realizadas, interrupções, relatórios e transporte HTTPS. Isso valida o executor determinístico, não o raciocínio do modelo.
+
+Casos cobertos: plano sem rede; URLs inválidas; escopo público/privado; bloqueio de metadados; DNS misto e conexão sem nova resolução; CORS refletido versus origem fixa/wildcard; proibição de redirecionamentos; parada em 429/500; HEAD em arquivos sensíveis; limite de requisições e de corpo; resposta lenta; ausência de segredos no relatório; recusa de credenciais em HTTP; TLS com CA de teste e rejeição de certificado não confiável; execução real da CLI.
+
+A fixture TLS gera chave/certificado temporários com OpenSSL, sem publicar material de chave no repositório. OpenSSL é dependência desse teste, não do executor. O CI deve ser consultado para identificar qualquer teste pulado por indisponibilidade do utilitário.
